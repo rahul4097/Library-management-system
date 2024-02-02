@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-between flex-md nowrap align-items-center pt-3 pb-2 mb-2 border-bottom">
+    <h4 class="h2" ><span class="text-info">Returning</span> book name  - <%= customer.title %> & member is - <%= customer.requester %></h4>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group me-2">
+            <button class="btn btn-sm btn-outline-secondary" class="btn btn-sm btn-outline-secondary">?</a>
+        </div>
+    </div>
+</div>
+<div class="col-py-3">
+    <div class="row">
+        <div class="col">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/bookRequest">Books Dashboard</a></li>
+                    <li class="breadcrumb-item active"><%= customer.title %> <%= customer.requester %></li> 
+                </ol>
+            </nav>
+        </div>
+        <div class="col text-end-fw-lighter">
+            <b>Last Updated <%=  new Date(customer.updatedAt).toLocaleString() %></b><br/>
+            <b class="text-danger">UserId: </b><%= customer._id %>
+        </div>
+    </div>
+</div>
+
+<form action="/bookRequest/editBookRequest/<%= customer._id %>?_method=PUT" method="POST">
+
+    <div class="row form-group mb-4">
+        <div class="col">
+            <label for="title">Book Name</label>
+            <input type="text" name="title" class="form-control" id="title" value="<%= customer.title %>" placeholder="Title"
+                required>
+        </div>
+        <div class="col">
+            <label for="requester">Member</label>
+            <input type="text" name="requester" class="form-control" id="requester" value="<%= customer.requester %>" placeholder="Member Name"
+                required>
+        </div>
+        <div class="col bookReturnDiv">
+            <label for="bookReturned" class=" form-check form-check-inline bookR">Book Returned</label>
+            <input type="radio" name="bookReturned" class="form-check-input" id="bookReturned" value="<%= customer.bookReturned %>" 
+                required>  Click to Proceed
+        </div>
+    </div>
+    <div class="row form-group mb-4">
+        <div class="col">
+            <label for="returnedDate">Return Date</label>
+            <input type="date" name="returnedDate" class="form-control" id="returnedDate" value="<%= customer.returnedDate %>" placeholder="returnedDate" required>
+        </div>
+    </div>
+
+    
+
+    <div class="form-group mb-4">
+        <button type="submit" class="btn btn-info">Return Book</button>
+</form>

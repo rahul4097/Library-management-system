@@ -1,0 +1,53 @@
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center pt-3 pb-2 mb-4 border-bottom">
+        <h1 class="h2 text-info">Dashboard - All Requested Books</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group me-2">
+                <a href="/bookRequest/requesterBook" class="btn btn-sm btn-outline-info">+ Issue New Book</a>
+            </div>
+        </div>
+    </div>
+
+    <% bookMessages.forEach(message => { %>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <%= message %>   
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <% }) %>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
+            <thead>
+                <tr class="text-danger">
+                    <th scope="col">Book Name</th>
+                    <th scope="col">Member</th>
+                    <th scope="col">Issue Date</th>
+                    <th scope="col">Return Date</th>
+                    <th scope="col" class="text-end">Action</th>
+                </tr>
+            </thead> 
+            <tbody>
+                <% bookrequests.forEach(request => { %>
+                    <tr class="align-middle">
+                        <td> <%= request.title %></td>
+                        <td> <%= request.requester %></td>
+                        <td> <%= request.requestedDate %></td>
+                        <td> <%= request.returnedDate %></td>
+                        
+                       
+                        <td class="text-end"> 
+                            <div class="btn-group" role="group" aria-label="Action Buttons">
+                                <a href="/bookRequest/viewBookRequest/<%= request._id %>" class="btn btn-info btn-small"><i class="bi bi-eye"></i></a>
+
+                                <a href="/bookRequest/editBookRequest/<%= request._id %>" class="btn btn-success btn-sm <% if (request.bookReturned) { %>
+                                disabled
+                                <% } %>">Return
+                                </a>
+                            </div>
+                        </td>
+                    </tr>   
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</div>
